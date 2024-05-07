@@ -1,3 +1,6 @@
+import React from "react";
+import { createRoot } from "react-dom";
+
 const Pet = (props) => {
   return React.createElement("div", {}, [
     React.createElement("h1", {}, props.name),
@@ -28,5 +31,6 @@ const App = () => {
 };
 
 const container = document.getElementById("root");
-const root = ReactDOM.createRoot(container); // concurrency, used to be static mode & concurrent mode.
+const root = createRoot(container); // concurrency, used to be static mode & concurrent mode.
 root.render(React.createElement(App));
+// tree shaking - live code inclusion
