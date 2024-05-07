@@ -10,19 +10,8 @@
     <div id="root">not rendered</div>
     <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
-    <script>
+    <script src="./App.js">
         // your code goes here xdd
-        const App = () => {
-            return React.createElement(
-                "div",
-                {}, // handle attributes here
-                React.createElement("h1", {}, "Adopt Me!")
-            )
-        };
-        
-        const container = document.getElementById('root');
-        const root = ReactDOM.createRoot(container); // concurrency, used to be static mode & concurrent mode.
-        root.render(React.createElement(App));
     </script>
 </body>
 </html>
