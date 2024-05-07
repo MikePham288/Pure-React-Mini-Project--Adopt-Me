@@ -21,7 +21,7 @@
         };
         
         const container = document.getElementById('root');
-        const root = ReactDOM.createRoot(container);
+        const root = ReactDOM.createRoot(container); // concurrency, used to be static mode & concurrent mode.
         root.render(React.createElement(App));
     </script>
 </body>
