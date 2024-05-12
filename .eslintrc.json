@@ -3,10 +3,10 @@
     "eslint:recommended",
     "plugin:import/errors",
     "plugin:react/recommended",
-    "plugin:jsx-ally/recommmended",
+    "plugin:jsx-a11y/recommended",
     "prettier"
   ],
-  "plugins": ["react", "import", "jsx-ally"],
+  "plugins": ["react", "import", "jsx-a11y"],
   "rules": {
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0
