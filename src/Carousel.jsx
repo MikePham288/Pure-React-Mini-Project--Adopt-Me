@@ -9,6 +9,13 @@ class Carousel extends Component {
     images: ["http://pets-images.dev-apis.com"],
   };
 
+  handleIndexClick = (e) => {
+    console.log(e.target.dataset.index);
+    this.setState({
+      active: +e.target.dataset.index,
+    });
+  }; // arrow function it doesn't create new scope, Normal functions invoke new scope at the point of invocation
+
   render() {
     const { active } = this.state;
     const { images } = this.props;
@@ -18,7 +25,10 @@ class Carousel extends Component {
         <img src={images[active]} alt="animal hero" />
         <div className="carousel-smaller">
           {images.map((photo, index) => (
+            // eslint-disable-next-line
             <img
+              onClick={this.handleIndexClick}
+              data-index={index}
               key={photo}
               src={photo}
               alt="animal thumbnail"
