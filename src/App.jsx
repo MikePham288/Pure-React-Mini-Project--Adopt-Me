@@ -11,6 +11,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: Infinity,
       cacheTime: Infinity,
+      suspense: true,
     },
   },
 });
@@ -25,8 +26,8 @@ const App = () => {
           "url('https://pets-images.dev-apis.com/pets/wallpaperA.jpg')",
       }}
     >
-      <QueryClientProvider client={queryClient}>
-        <AdoptedPetContext.Provider value={adoptedPet}>
+      <AdoptedPetContext.Provider value={adoptedPet}>
+        <QueryClientProvider client={queryClient}>
           <Suspense
             fallback={
               <div className="flex items-center justify-center p-4">
@@ -52,8 +53,8 @@ const App = () => {
       <Pet name="Pepper" animal="dog" breed="Husky"></Pet>
       <Pet name="Doink" animal="cat" breed="CockMixedtiel"></Pet> */}
           {/* </div> */}
-        </AdoptedPetContext.Provider>
-      </QueryClientProvider>
+        </QueryClientProvider>
+      </AdoptedPetContext.Provider>
     </div>
   );
 };
