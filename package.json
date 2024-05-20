@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --outDir ../dist/client",
-    "build:server": "vite build --outDir ../dist/server -- ssr ServerApp.jsx",
+    "build:server": "vite build --outDir ../dist/server --ssr ServerApp.jsx",
     "start": "node server.js",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
