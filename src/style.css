@@ -12,6 +12,10 @@
   .search-inputs {
     @apply mb-5 block w-60;
   }
+
+  .circle-clip {
+    clip-path: circle(50% at 50% 50%);
+  }
 }
 
 @layer utilities {

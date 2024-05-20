@@ -17,8 +17,8 @@ const Details = () => {
 
   if (result.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
+      <div className="flex items-center justify-center p-4">
+        <h2 className="animate-spin text-[100px]">🌀</h2>
       </div>
     );
   }
@@ -26,27 +26,35 @@ const Details = () => {
   const pet = result.data.pets[0];
   return (
     // <h2>hi, {id}!</h2>
-    <div className="details">
+    <div className="my-0 mx-auto mb-6 w-[95%] rounded-lg p-4 xl:mx-auto xl:mb-6 xl:mt-0 xl:rounded-md xl:bg-pink-100 xl:p-4 xl:shadow-xl">
       <Carousel images={pet.images} />
       <div>
-        <h1>{pet.name}</h1>
-        <h2>
+        <h1 className="my-1 mx-0 text-center text-6xl text-gray-800">
+          {pet.name}
+        </h1>
+        <h2 className="mx-0 mt-1 mb-5 text-center">
           {pet.animal} - {pet.breed} - {pet.city}, {pet.state}
-          <button onClick={() => setShowModal(true)}> Adopt {pet.name}</button>
-          <p>{pet.description}</p>
+          <button
+            className="my-0 mx-auto block cursor-pointer rounded-md border-2 border-gray-800 bg-red-600 py-1 px-5 text-white"
+            onClick={() => setShowModal(true)}
+          >
+            Adopt {pet.name}
+          </button>
+          <p className="py-0 px-4 leading-normal">{pet.description}</p>
           {showModal ? (
             <Modal>
-              <div>
+              <div className="max-w-[500px] rounded-3xl bg-pink-100 p-4 text-center">
                 <h1>Would you like to adopt {pet.name}?</h1>
-                <div className="buttons">
+                <div className="mr-4 inline-block">
                   <button
+                    className="my-0 mx-auto block cursor-pointer rounded-md border-2 border-gray-800 bg-red-600 py-1 px-5 text-white"
                     onClick={() => {
                       setAdoptedPet(pet);
                       navigate("/");
                     }}
                   >
                     Yes
-                  </button>{" "}
+                  </button>
                   <button onClick={() => setShowModal(false)}>No</button>
                 </div>
               </div>
