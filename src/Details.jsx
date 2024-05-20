@@ -55,7 +55,12 @@ const Details = () => {
                   >
                     Yes
                   </button>
-                  <button onClick={() => setShowModal(false)}>No</button>
+                  <button
+                    className="my-0 mx-auto block cursor-pointer rounded-md border-2 border-gray-800 bg-red-600 py-1 px-5 text-white"
+                    onClick={() => setShowModal(false)}
+                  >
+                    No
+                  </button>
                 </div>
               </div>
             </Modal>
