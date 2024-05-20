@@ -18,26 +18,28 @@ const queryClient = new QueryClient({
 const App = () => {
   const adoptedPet = useState(null);
   return (
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <AdoptedPetContext.Provider value={adoptedPet}>
-          <header>
-            <Link to="/">Adopt Me</Link>
-          </header>
-          {/* <div> */}
-          {/* <h1>Adopt Me!</h1> */}
-          <Routes>
-            <Route path="/details/:id" element={<Details />}></Route>
-            <Route path="/" element={<SearchParams />}></Route>
-          </Routes>
-          {/* <SearchParams></SearchParams> */}
-          {/* <Pet name="Milo" animal="dog" breed="Husky"></Pet>
+    <div className="p-0 m-0" style={{background:"url('https://pets-images.dev-apis.com/pets/wallpaperA.jpg')"}}>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <AdoptedPetContext.Provider value={adoptedPet}>
+            <header>
+              <Link to="/">Adopt Me</Link>
+            </header>
+            {/* <div> */}
+            {/* <h1>Adopt Me!</h1> */}
+            <Routes>
+              <Route path="/details/:id" element={<Details />}></Route>
+              <Route path="/" element={<SearchParams />}></Route>
+            </Routes>
+            {/* <SearchParams></SearchParams> */}
+            {/* <Pet name="Milo" animal="dog" breed="Husky"></Pet>
       <Pet name="Pepper" animal="dog" breed="Husky"></Pet>
       <Pet name="Doink" animal="cat" breed="CockMixedtiel"></Pet> */}
-          {/* </div> */}
-        </AdoptedPetContext.Provider>
-      </QueryClientProvider>
-    </BrowserRouter>
+            {/* </div> */}
+          </AdoptedPetContext.Provider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </div>
   );
 };
 
