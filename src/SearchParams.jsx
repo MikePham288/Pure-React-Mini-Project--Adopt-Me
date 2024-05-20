@@ -4,6 +4,7 @@ import {
   useEffect,
   useMemo,
   useState,
+  useTransition,
 } from "react";
 import useBreedList from "./useBreedList";
 import Results from "./Results";
@@ -21,6 +22,7 @@ const SearchParams = () => {
   const [animal, setAnimal] = useState("");
   const [breeds] = useBreedList(animal);
   const [adoptedPet] = useContext(AdoptedPetContext);
+  const [isPending, startTransition] = useTransition();
   // Equivalent
   // const locationHook - useState('');
   // const location = locationHook[0];
@@ -62,8 +64,9 @@ const SearchParams = () => {
             location: formData.get("location") ?? "",
             breed: formData.get("breed") ?? "",
           };
-
-          setRequestParams(obj);
+          startTransition(() => {
+            setRequestParams(obj);
+          });
         }}
       >
         {adoptedPet ? (
@@ -120,10 +123,15 @@ const SearchParams = () => {
             ))}
           </select>
         </label>
-
-        <button className="rounded border-none bg-orange-500 px-6 py-2 text-white hover:opacity-50">
-          Submit
-        </button>
+        {isPending ? (
+          <div className="flex items-center justify-center p-4">
+            <h2 className="animate-spin text-[100px]">🌀</h2>
+          </div>
+        ) : (
+          <button className="rounded border-none bg-orange-500 px-6 py-2 text-white hover:opacity-50">
+            Submit
+          </button>
+        )}
       </form>
       {/* <Results pets={pets} /> */}
       {renderedPets}
