@@ -23,6 +23,7 @@ class Carousel extends Component {
     return (
       <div className="mt-2 flex h-96 items-center justify-around">
         <img
+          data-testid="hero"
           className="max-h-96 max-w-[45%]"
           src={images[active]}
           alt="animal hero"
@@ -32,6 +33,7 @@ class Carousel extends Component {
             // eslint-disable-next-line
             <img
               onClick={this.handleIndexClick}
+              data-testid={`thumbnail${index}`}
               data-index={index}
               key={photo}
               src={photo}
