@@ -1,6 +1,10 @@
-import { Component } from "react";
+import { Component, MouseEvent } from "react";
 
-class Carousel extends Component {
+interface IProps {
+  images: string[];
+}
+
+class Carousel extends Component<IProps> {
   state = {
     active: 0,
   };
@@ -9,11 +13,15 @@ class Carousel extends Component {
     images: ["http://pets-images.dev-apis.com"],
   };
 
-  handleIndexClick = (e) => {
-    console.log(e.target.dataset.index);
-    this.setState({
-      active: +e.target.dataset.index,
-    });
+  handleIndexClick = (e: MouseEvent<HTMLElement>) => {
+    if (!(e.target instanceof HTMLElement)) {
+      return;
+    }
+    if (e.target.dataset.index) {
+      this.setState({
+        active: +e.target.dataset.index,
+      });
+    }
   }; // arrow function it doesn't create new scope, Normal functions invoke new scope at the point of invocation
 
   render() {

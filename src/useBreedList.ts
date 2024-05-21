@@ -1,9 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { QueryStatus, useQuery } from "@tanstack/react-query";
 import fetchBreedList from "./fetchBreedList";
+import { Animal } from "./APIResponsesTypes";
 
 // const localCache = {};
 
-export default function useBreedList(animal) {
+export default function useBreedList(animal: Animal) {
   // DOn't need this anymore
   //   const [breedList, setBreedList] = useState([]);
   //   const [status, setStatus] = useState("unloaded");
@@ -42,5 +43,5 @@ export default function useBreedList(animal) {
 
   const result = useQuery(["breeds", animal], fetchBreedList);
 
-  return [result?.data?.breeds ?? [], result.status];
+  return [result?.data?.breeds ?? [], result.status] as [string[], QueryStatus];
 }

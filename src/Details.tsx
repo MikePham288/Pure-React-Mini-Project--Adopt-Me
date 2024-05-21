@@ -5,14 +5,21 @@ import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import { lazy, useContext, useState } from "react";
 import AdoptedPetContext from "./AdoptedPetContext";
+
 const Modal = lazy(() => import("./Modal"));
 
 const Details = () => {
   const { id } = useParams();
+
+  if (!id) {
+    throw new Error(
+      "why did you not give me an id??? I wanted an id!! I have no id."
+    );
+  }
   const result = useQuery(["details", id], fetchPet);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setAdoptedPet] = useContext(AdoptedPetContext);
 
   if (result.isLoading) {
@@ -23,7 +30,12 @@ const Details = () => {
     );
   }
 
-  const pet = result.data.pets[0];
+  const pet = result?.data?.pets[0];
+
+  if (!pet) {
+    throw new Error("no pet LOL");
+  }
+
   return (
     // <h2>hi, {id}!</h2>
     <div className="my-0 mx-auto mb-6 w-[95%] rounded-lg p-4 xl:mx-auto xl:mb-6 xl:mt-0 xl:rounded-md xl:bg-pink-100 xl:p-4 xl:shadow-xl">
@@ -71,10 +83,10 @@ const Details = () => {
   );
 };
 
-function DetailsErrorBoundary(props) {
+function DetailsErrorBoundary() {
   return (
     <ErrorBoundary>
-      <Details {...props} />
+      <Details />
     </ErrorBoundary>
   );
 }
