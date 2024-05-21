@@ -3,8 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import fetchPet from "./fetchPet";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
-import { lazy, useContext, useState } from "react";
-import AdoptedPetContext from "./AdoptedPetContext";
+import { lazy, useState } from "react";
+import { useDispatch } from "react-redux";
+import { adopt } from "./adoptedPetSlice";
+
 const Modal = lazy(() => import("./Modal"));
 
 const Details = () => {
@@ -13,7 +15,8 @@ const Details = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
-  const [_, setAdoptedPet] = useContext(AdoptedPetContext);
+  // const [_, setAdoptedPet] = useContext(AdoptedPetContext);
+  const dispatch = useDispatch();
 
   if (result.isLoading) {
     return (
@@ -49,7 +52,7 @@ const Details = () => {
                   <button
                     className="my-0 mx-auto block cursor-pointer rounded-md border-2 border-gray-800 bg-red-600 py-1 px-5 text-white"
                     onClick={() => {
-                      setAdoptedPet(pet);
+                      dispatch(adopt(pet));
                       navigate("/");
                     }}
                   >

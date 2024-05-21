@@ -1,18 +1,16 @@
-import {
-  useContext,
-  useDeferredValue,
-  useEffect,
-  useMemo,
-  useState,
-  useTransition,
-} from "react";
+import { useDeferredValue, useMemo, useState, useTransition } from "react";
 import useBreedList from "./useBreedList";
 import Results from "./Results";
 import { useQuery } from "@tanstack/react-query";
 import fetchSearch from "./fetchSearch";
+import { useSelector } from "react-redux";
 const ANIMALS = ["dog", "cat", "bird", "rabbit", "reptile"];
 
 const SearchParams = () => {
+  // Equivalent
+  // const locationHook - useState('');
+  // const location = locationHook[0];
+  // const setLocation = locationHook[1];
   const [requestParams, setRequestParams] = useState({
     location: "",
     animal: "",
@@ -20,12 +18,9 @@ const SearchParams = () => {
   });
   const [animal, setAnimal] = useState("");
   const [breeds] = useBreedList(animal);
-  const [adoptedPet] = useContext(AdoptedPetContext);
+  // const [adoptedPet] = useContext(AdoptedPetContext);
   const [isPending, startTransition] = useTransition();
-  // Equivalent
-  // const locationHook - useState('');
-  // const location = locationHook[0];
-  // const setLocation = locationHook[1];
+  const adoptedPet = useSelector((state) => state.adoptedPet.value);
 
   const results = useQuery(["search", requestParams], fetchSearch);
 
