@@ -3,7 +3,8 @@ import useBreedList from "./useBreedList";
 import Results from "./Results";
 import { useQuery } from "@tanstack/react-query";
 import fetchSearch from "./fetchSearch";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { all } from "./searchParamsSlice";
 const ANIMALS = ["dog", "cat", "bird", "rabbit", "reptile"];
 
 const SearchParams = () => {
@@ -11,18 +12,20 @@ const SearchParams = () => {
   // const locationHook - useState('');
   // const location = locationHook[0];
   // const setLocation = locationHook[1];
-  const [requestParams, setRequestParams] = useState({
-    location: "",
-    animal: "",
-    breed: "",
-  });
+  // const [requestParams, setRequestParams] = useState({
+  //   location: "",
+  //   animal: "",
+  //   breed: "",
+  // });
   const [animal, setAnimal] = useState("");
   const [breeds] = useBreedList(animal);
   // const [adoptedPet] = useContext(AdoptedPetContext);
   const [isPending, startTransition] = useTransition();
   const adoptedPet = useSelector((state) => state.adoptedPet.value);
+  const searchParams = useSelector((state) => state.searchParams.value);
+  const dispatch = useDispatch();
 
-  const results = useQuery(["search", requestParams], fetchSearch);
+  const results = useQuery(["search", searchParams], fetchSearch);
 
   const pets = results?.data?.pets ?? [];
   const deferredPets = useDeferredValue(pets);
@@ -59,7 +62,7 @@ const SearchParams = () => {
             breed: formData.get("breed") ?? "",
           };
           startTransition(() => {
-            setRequestParams(obj);
+            dispatch(all(obj));
           });
         }}
       >
