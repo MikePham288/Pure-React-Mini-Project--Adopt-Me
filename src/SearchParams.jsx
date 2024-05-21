@@ -1,10 +1,11 @@
 import { useDeferredValue, useMemo, useState, useTransition } from "react";
 import useBreedList from "./useBreedList";
 import Results from "./Results";
-import { useQuery } from "@tanstack/react-query";
-import fetchSearch from "./fetchSearch";
+// import { useQuery } from "@tanstack/react-query";
+// import fetchSearch from "./fetchSearch";
 import { useDispatch, useSelector } from "react-redux";
 import { all } from "./searchParamsSlice";
+import { useSearchQuery } from "./petApiService";
 const ANIMALS = ["dog", "cat", "bird", "rabbit", "reptile"];
 
 const SearchParams = () => {
@@ -25,9 +26,10 @@ const SearchParams = () => {
   const searchParams = useSelector((state) => state.searchParams.value);
   const dispatch = useDispatch();
 
-  const results = useQuery(["search", searchParams], fetchSearch);
+  // const results = useQuery(["search", searchParams], fetchSearch);
 
-  const pets = results?.data?.pets ?? [];
+  // const pets = results?.data?.pets ?? [];
+  const { data: pets } = useSearchQuery(searchParams);
   const deferredPets = useDeferredValue(pets);
   const renderedPets = useMemo(
     () => <Results pets={deferredPets} />,
